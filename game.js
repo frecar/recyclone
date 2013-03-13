@@ -1,8 +1,8 @@
-(function() {
+(function () {
 
     var canvas = document.getElementById('bbdemo');
 
-    var world = boxbox.createWorld(canvas, {debugDraw:false});
+    var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 40});
 
     var player = world.createEntity({
         name: 'player',
@@ -12,11 +12,11 @@
         width: .2,
         fixedRotation: true,
         friction: .3,
-        restitution: 0,
+        restitution: 0.5,
         color: 'blue'
     });
 
-    player.onKeydown(function(e) {
+    player.onKeydown(function (e) {
 
         if (this._destroyed) {
             return;
@@ -66,7 +66,7 @@
 
     });
 
-    player.onKeyup(function(e) {
+    player.onKeyup(function (e) {
 
         if (this._destroyed) {
             return;
@@ -81,150 +81,57 @@
 
     });
 
-    player.onImpact(function(other, power, tangentPower) {
+    player.onImpact(function (other, power, tangentPower) {
         if (power > 3) {
-            damage(power - 3);
+            //damage(power - 3);
         }
     });
 
-    world.onRender(function(ctx) {
+    world.onRender(function (ctx) {
 
-        // update camera position every draw
-        var p = player.position();
-        var c = this.camera();
-
-        if (p.y < 14) {
-            if (p.x - 8 < c.x) {
-                this.camera({x: player.position().x - 8});
-            }
-            else if (p.x - 12 > c.x) {
-                this.camera({x: player.position().x - 12});
-            }
-        }
-
-        // If you fall off the world, zoom out
-        else {
-            var scale = 30;
-            scale -= (p.y - 14);
-            scale = scale < 1 ? 1 : scale;
-            this.scale(scale);
-
-            var newCameraX = c.x;
-            if (newCameraX > -9 || newCameraX < -11) {
-                if (newCameraX > -10) {
-                    newCameraX = newCameraX - .3;
-                }
-                if (newCameraX < -10) {
-                    newCameraX = newCameraX + .3;
-                }
-                this.camera({x: newCameraX});
-            }
-        }
-
-        // Rendering for the joint between the two wheels
-        var p1 = wheel1.canvasPosition();
-        var p2 = wheel2.canvasPosition();
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
     });
 
     var groundTemplate = {
         name: 'ground',
         type: 'static',
         height: .1,
-        color: 'green'
+        color: 'red'
     };
 
-    world.createEntity(groundTemplate, {width: 10, x: 10, y: 13.22});
+    //Wall of heaven
+    world.createEntity(groundTemplate, {width: 500, x: 0, y: 0});
 
-    world.createEntity(groundTemplate, {width: 3, x: 3, y: 5});
+    //Wall of ground
+    world.createEntity(groundTemplate, {width: 500, x: 3, y: 18});
 
-    world.createEntity(groundTemplate, {width: 4, x: 16, y: 5});
+    //Left wall
+    world.createEntity(groundTemplate, {width: 0.1, x: 0, height: 500, y: 5});
 
-    world.createEntity({
-        name: 'square',
-        x: 13,
-        y: 8,
-        height: .8,
-        width: .2,
-        imageOffsetY: -.2
-    });
+    //Right wall
+    world.createEntity(groundTemplate, {width: 0.1, x: 32, y: 0, height: 20});
+
+    world.createEntity(
+        {
+            width: 0.2,
+            //shape: "square",
+            type: "static",
+            rotation: 70,
+            x: 3,
+            y: 5,
+            height: 4,
+            color: 'green'
+        });
 
     world.createEntity({
         name: 'circle',
         shape: 'circle',
-        radius: 2,
-        x: 14,
+        radius: 1,
+        x: 1,
         y: 3,
         density: .5,
         image: 'wheel.png',
         imageStretchToFit: true
     });
 
-    world.createEntity({
-        name: 'poly',
-        shape: 'polygon',
-        x: 5,
-        y: 8
-    });
-
-    // Car thing
-    var wheelTemplate = {
-        name: 'wheel',
-        shape: 'circle',
-        radius: 1,
-        image: 'wheel.png',
-        imageStretchToFit: true
-    };
-    var wheel1 = world.createEntity(wheelTemplate, {x: 0, y:1});
-    var wheel2 = world.createEntity(wheelTemplate, {x: 4, y:1});
-    world.createJoint(wheel1, wheel2);
-
-    var platform = world.createEntity({
-        name: 'platform',
-        fixedRotation: true,
-        height: .1
-    });
-
-    var platformMovingUp = true;
-
-    window.setInterval(function() {
-        platformMovingUp = !platformMovingUp;
-        if (platformMovingUp) {
-            platform.setVelocity('moving platform', 5, 0);
-        }
-        else {
-            platform.setVelocity('moving platform', 5, 180);
-        }
-    }, 1500);
-
-    var coinTemplate = {
-        name: 'coin',
-        shape: 'circle',
-        radius: .1,
-        color: 'yellow',
-        onStartContact: function(other) {
-            if (other.name() === 'player') {
-                //addScore(100);
-                this.destroy();
-            }
-        }
-    };
-
-    world.createEntity(coinTemplate, {x: 2, y: 4});
-
-    world.createEntity(coinTemplate, {x: 2, y: 12});
-
-    world.createEntity(coinTemplate, {
-        x: 16,
-        y: 5,
-        shape: 'square',
-        height: .1,
-        width: .1
-    });
 
 })();
