@@ -115,6 +115,7 @@
             width: 0.2,
             //shape: "square",
             type: "static",
+            fixedRotation: false,
             rotation: 70,
             x: 3,
             y: 5,
@@ -132,6 +133,35 @@
         image: 'wheel.png',
         imageStretchToFit: true
     });
+
+    for(var i=0; i < 15; i++) {
+
+        world.createEntity({
+            name: 'circle',
+            shape: 'circle',
+            radius: 0.5,
+            x: i + 0.3,
+            y: 0.2 + i,
+            density: .5,
+            image: 'wheel.png',
+            imageStretchToFit: true
+        });
+
+        world.createEntity({
+            name: 'circle',
+            shape: 'circle',
+            radius: 0.5,
+            x: 15 + i,
+            y: 15 - 0.2 - i,
+            density: .5,
+            image: 'wheel.png',
+            imageStretchToFit: true
+        });
+
+
+
+    }
+
 
 
 })();
