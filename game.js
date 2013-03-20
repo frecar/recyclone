@@ -7,7 +7,7 @@
     
     var player = world.createEntity({
         name: 'player',
-        x: 4,
+        x: 6,
         y: 0,
         height: .2,
         width: .2,
@@ -245,6 +245,10 @@
         });
 
 
+    function delete_after_seconds() {
+        console.log(this);
+    }
+
     //Ekorn 1
     world.createEntity({
         name: 'circle',
@@ -264,12 +268,12 @@
     }).onImpact(function (entity, normalForce, tangentialForce) {
             if (normalForce > 6) {
                 if (entity._name == "soppelpose") {
-                    //setTimeout(this.destroy(),2000);
+
                 }
             }
         });
 
-    //Gren for ekorn
+    //Gren for ekorn 1
     world.createEntity({
         type: 'static',
         height: 0.1,
@@ -332,7 +336,7 @@
     }
 
     //Bæsjekaster
-    setTimeout(addPoop, 3500);
+    setTimeout(addPoop, 4200);
 
     //Søppelpose
     world.createEntity({
