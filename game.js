@@ -1,6 +1,6 @@
 (function () {
 
-    var canvas = document.getElementById('bbdemo');
+    var canvas = document.getElementById('game');
 
     var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 40});
 
@@ -102,7 +102,7 @@
     world.createEntity(groundTemplate, {width: 500, x: 0, y: 0});
 
     //Wall of ground
-    world.createEntity(groundTemplate, {width: 500, x: 3, y: 18});
+    world.createEntity(groundTemplate, {width: 500, x: 3, y: 15.5});
 
     //Left wall
     world.createEntity(groundTemplate, {width: 0.1, x: 0, height: 500, y: 5});
@@ -114,13 +114,15 @@
         return false;
     }
 
+
+    //Slope part 1
     world.createEntity(
         {
             shape: "polygon",
             type: "static",
             points: [
-                {x: 0, y: 4},
-                {x: 3, y: 11}
+                {x: 3, y: 3},
+                {x: 4.5, y: 9}
             ],
             rotation: 120,
             draw: draw_invisible,
@@ -129,13 +131,14 @@
             friction: 0.1
         });
 
+    //Slope part 2
     world.createEntity(
         {
             shape: "polygon",
             type: "static",
             points: [
-                {x: 3, y: 11},
-                {x: 6, y: 14}
+                {x: 4.5, y: 9},
+                {x: 5.5, y: 11}
             ],
             rotation: 120,
             draw: draw_invisible,
@@ -145,13 +148,14 @@
             friction: 0
         });
 
+    //Slope part 2
     world.createEntity(
         {
             shape: "polygon",
             type: "static",
             points: [
-                {x: 3.5, y: 11.5},
-                {x: 7, y: 12}
+                {x: 5.5, y: 11},
+                {x: 6.8, y: 11.4}
             ],
             rotation: 120,
             draw: draw_invisible,
@@ -161,13 +165,14 @@
             friction: 0
         });
 
+     //Slope part 3
     world.createEntity(
         {
             shape: "polygon",
             type: "static",
             points: [
-                {x: 4, y: 12},
-                {x: 7, y: 11}
+                {x: 6.8, y: 11.4},
+                {x: 7.7, y: 11}
             ],
             rotation: 120,
             draw: draw_invisible,
@@ -176,31 +181,79 @@
             y: 0,
             friction: 0
         });
+
+     //Slope part 4
+    world.createEntity(
+        {
+            shape: "polygon",
+            type: "static",
+            points: [
+                {x: 7.7, y: 11},
+                {x: 8.8, y: 10.2}
+            ],
+            rotation: 120,
+            draw: draw_invisible,
+
+            x: 0,
+            y: 0,
+            friction: 0
+        });
+
 
     //Lastebil
     world.createEntity(
         {
-            shape: "square",
             type: "static",
-            image:"lastebil.png",
+            image: "lastebil.png",
             imageStretchToFit: true,
-            x: -1,
-            y: 3
+            width: 1.5,
+            height: 0.7,
+            x: 1,
+            y: 2
         });
 
+
+    //Ekorn 1
+    world.createEntity({
+        name: 'circle',
+        shape: 'square',
+        type: 'dynamic',
+        radius: 2,
+        x: 24.3,
+        y: 8,
+        width: 0.8,
+        height: 0.8,
+        density: 1,
+        friction: 1,
+        image: 'ekorn.png',
+        imageStretchToFit: true
+    });
+
+    //Gren for ekorn
+    world.createEntity({
+        type: 'static',
+        height: 0.1,
+        color: 'white',
+        width: .4,
+        x: 24.3,
+        y: 10.2,
+        draw: draw_invisible
+    });
+
+  
 
     //Søppelpose
     world.createEntity({
         name: 'circle',
         shape: 'circle',
         radius: 0.7,
-        x: 0,
-        y: 1,
+        x: 4,
+        y: 2,
         density: 1,
-        friction: 1,
+        friction: 0.2,
         image: 'pose.png',
         imageStretchToFit: true
-    }).applyImpulse(90,1);
+    }).applyImpulse(150);
 
 })();
 
