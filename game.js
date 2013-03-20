@@ -110,6 +110,10 @@
     //Right wall
     world.createEntity(groundTemplate, {width: 0.1, x: 32, y: 0, height: 20});
 
+    function draw_invisible(ctx, x, y) {
+        return false;
+    }
+
     world.createEntity(
         {
             shape: "polygon",
@@ -119,6 +123,7 @@
                 {x: 3, y: 11}
             ],
             rotation: 120,
+            draw: draw_invisible,
             x: 0,
             y: 0,
             friction: 0.1
@@ -133,6 +138,8 @@
                 {x: 6, y: 14}
             ],
             rotation: 120,
+            draw: draw_invisible,
+
             x: 0,
             y: 0,
             friction: 0
@@ -147,6 +154,8 @@
                 {x: 7, y: 12}
             ],
             rotation: 120,
+            draw: draw_invisible,
+
             x: 0,
             y: 0,
             friction: 0
@@ -161,12 +170,26 @@
                 {x: 7, y: 11}
             ],
             rotation: 120,
+            draw: draw_invisible,
+
             x: 0,
             y: 0,
             friction: 0
         });
 
+    //Lastebil
+    world.createEntity(
+        {
+            shape: "square",
+            type: "static",
+            image:"lastebil.png",
+            imageStretchToFit: true,
+            x: -1,
+            y: 3
+        });
 
+
+    //Søppelpose
     world.createEntity({
         name: 'circle',
         shape: 'circle',
@@ -175,9 +198,9 @@
         y: 1,
         density: 1,
         friction: 1,
-        image: 'wheel.png',
+        image: 'pose.png',
         imageStretchToFit: true
-    });
+    }).applyImpulse(90,1);
 
 })();
 
