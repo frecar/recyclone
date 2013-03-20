@@ -4,10 +4,11 @@
 
     var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 40});
 
+    
     var player = world.createEntity({
         name: 'player',
-        x: .5,
-        y: 12,
+        x: 4,
+        y: 0,
         height: .2,
         width: .2,
         fixedRotation: true,
@@ -102,7 +103,7 @@
     world.createEntity(groundTemplate, {width: 500, x: 0, y: 0});
 
     //Wall of ground
-    world.createEntity(groundTemplate, {width: 500, x: 3, y: 15.5});
+    world.createEntity(groundTemplate, {width: 500, x: 3, y: 13.8, draw: draw_invisible});
 
     //Left wall
     world.createEntity(groundTemplate, {width: 0.1, x: 0, height: 500, y: 5});
@@ -113,7 +114,6 @@
     function draw_invisible(ctx, x, y) {
         return false;
     }
-
 
     //Slope part 1
     world.createEntity(
@@ -165,7 +165,7 @@
             friction: 0
         });
 
-     //Slope part 3
+    //Slope part 3
     world.createEntity(
         {
             shape: "polygon",
@@ -182,7 +182,7 @@
             friction: 0
         });
 
-     //Slope part 4
+    //Slope part 4
     world.createEntity(
         {
             shape: "polygon",
@@ -197,6 +197,36 @@
             x: 0,
             y: 0,
             friction: 0
+        });
+
+    //Slope part 5
+    world.createEntity(
+        {
+            shape: "polygon",
+            type: "static",
+            points: [
+                {x: 9, y: 10.2},
+                {x: 9, y: 14}
+            ],
+            rotation: 120,
+            draw: draw_invisible,
+
+            x: 0,
+            y: 0,
+            friction: 0
+        });
+
+    //Butikk
+    world.createEntity(
+        {
+            shape: "square",
+            type: "static",
+            x: 1,
+            y: 12,
+            width: 1.5,
+            height: 2,
+            image: "Butikk.png",
+            imageStretchToFit: true
         });
 
 
@@ -225,9 +255,17 @@
         height: 0.8,
         density: 1,
         friction: 1,
+        sprite: true,
         image: 'ekorn.png',
         imageStretchToFit: true
-    });
+
+    }).onImpact(function (entity, normalForce, tangentialForce) {
+            if (normalForce > 6) {
+                if (entity._name == "soppelpose") {
+                    //setTimeout(this.destroy(),2000);
+                }
+            }
+        });
 
     //Gren for ekorn
     world.createEntity({
@@ -240,11 +278,63 @@
         draw: draw_invisible
     });
 
-  
+    //Ekorn 2
+    world.createEntity({
+        name: 'circle',
+        shape: 'square',
+        type: 'dynamic',
+        radius: 2,
+        x: 28.3,
+        y: 8,
+        width: 0.8,
+        height: 0.8,
+        density: 1,
+        friction: 1,
+        sprite: true,
+        image: 'ekorn.png',
+        imageStretchToFit: true
+
+    }).onImpact(function (entity, normalForce, tangentialForce) {
+            if (normalForce > 6) {
+                if (entity._name == "soppelpose") {
+                    //setTimeout(this.destroy(),2000);
+                }
+            }
+        });
+
+    //Gren for ekorn 2
+    world.createEntity({
+        type: 'static',
+        height: 0.1,
+        color: 'white',
+        width: .4,
+        x: 28.3,
+        y: 10.2,
+        draw: draw_invisible
+    });
+
+
+    function addPoop() {
+        var poop = world.createEntity({
+            type: 'dynamic',
+            x: 13.3,
+            y: 10.2,
+            image: "poop.png",
+            imageStretchToFit: true
+        });
+
+        poop.applyImpulse(120, 60);
+        poop.onImpact(function (entity, normalForce, tangentialForce) {
+            this.destroy();
+        })
+    }
+
+    //Bæsjekaster
+    setTimeout(addPoop, 3500);
 
     //Søppelpose
     world.createEntity({
-        name: 'circle',
+        name: 'soppelpose',
         shape: 'circle',
         radius: 0.7,
         x: 4,
