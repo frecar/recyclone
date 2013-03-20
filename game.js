@@ -94,8 +94,8 @@
     var groundTemplate = {
         name: 'ground',
         type: 'static',
-        height: .1,
-        color: 'red'
+        height: 0.1,
+        color: 'white'
     };
 
     //Wall of heaven
@@ -112,56 +112,72 @@
 
     world.createEntity(
         {
-            width: 0.2,
-            //shape: "square",
+            shape: "polygon",
             type: "static",
-            fixedRotation: false,
-            rotation: 70,
-            x: 3,
-            y: 5,
-            height: 4,
-            color: 'green'
+            points: [
+                {x: 0, y: 4},
+                {x: 3, y: 11}
+            ],
+            rotation: 120,
+            x: 0,
+            y: 0,
+            friction: 0.1
         });
+
+    world.createEntity(
+        {
+            shape: "polygon",
+            type: "static",
+            points: [
+                {x: 3, y: 11},
+                {x: 6, y: 14}
+            ],
+            rotation: 120,
+            x: 0,
+            y: 0,
+            friction: 0
+        });
+
+    world.createEntity(
+        {
+            shape: "polygon",
+            type: "static",
+            points: [
+                {x: 3.5, y: 11.5},
+                {x: 7, y: 12}
+            ],
+            rotation: 120,
+            x: 0,
+            y: 0,
+            friction: 0
+        });
+
+    world.createEntity(
+        {
+            shape: "polygon",
+            type: "static",
+            points: [
+                {x: 4, y: 12},
+                {x: 7, y: 11}
+            ],
+            rotation: 120,
+            x: 0,
+            y: 0,
+            friction: 0
+        });
+
 
     world.createEntity({
         name: 'circle',
         shape: 'circle',
-        radius: 1,
-        x: 1,
-        y: 3,
-        density: .5,
+        radius: 0.7,
+        x: 0,
+        y: 1,
+        density: 1,
+        friction: 1,
         image: 'wheel.png',
         imageStretchToFit: true
     });
 
-    for(var i=0; i < 15; i++) {
-
-        world.createEntity({
-            name: 'circle',
-            shape: 'circle',
-            radius: 0.5,
-            x: i + 0.3,
-            y: 0.2 + i,
-            density: .5,
-            image: 'wheel.png',
-            imageStretchToFit: true
-        });
-
-        world.createEntity({
-            name: 'circle',
-            shape: 'circle',
-            radius: 0.5,
-            x: 15 + i,
-            y: 15 - 0.2 - i,
-            density: .5,
-            image: 'wheel.png',
-            imageStretchToFit: true
-        });
-
-
-
-    }
-
-
-
 })();
+
