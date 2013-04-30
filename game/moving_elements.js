@@ -30,10 +30,10 @@ poop.onImpact(function (entity, normalForce, tangentialForce) {
 
 function trash_run() {
 
-    world.createEntity(soppelpose).applyImpulse(2.2, 0);
+    world.createEntity(soppelpose).applyImpulse(2 + Math.random(), 0);
     avaiableBoxes += 5;
 
-    setTimeout(trash_run, 5000);
+    setTimeout(trash_run, 1000);
 
 
 
