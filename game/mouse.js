@@ -5,7 +5,7 @@ function mydown(e) {
 
     if(avaiableBoxes > 0 && x > 2.8 && x < 7.4 ){
 
-        var box = {
+        var box = world.createEntity({
             name: 'soppelpose',
             shape: 'square',
             x: x,
@@ -15,9 +15,15 @@ function mydown(e) {
             color:"red",
             image: "gfx/box.png",
             imageStretchToFit:true
-        };
+        });
 
-        world.createEntity(box);
+        function delete_obj(self) {
+            box.destroy();
+        }
+
+        box.onFinishContact(function(self) {
+            setTimeout(delete_obj, 5000);
+        });
 
         avaiableBoxes -=1;
 
