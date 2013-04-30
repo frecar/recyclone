@@ -6,7 +6,7 @@ function mydown(e) {
     if(avaiableBoxes > 0 && x > 2.8 && x < 7.4 ){
 
         var box = world.createEntity({
-            name: 'soppelpose',
+            name: 'boxbox',
             shape: 'square',
             x: x,
             y: y,
@@ -17,13 +17,13 @@ function mydown(e) {
             imageStretchToFit:true
         });
 
-        function delete_obj(self) {
-            box.destroy();
-        }
 
-        box.onFinishContact(function(self) {
-            setTimeout(delete_obj, 5000);
+        box.onImpact(function( entity, force, friction ){
+            if(force > 0.7) {
+                box.destroy();
+            }
         });
+
 
         avaiableBoxes -=1;
 

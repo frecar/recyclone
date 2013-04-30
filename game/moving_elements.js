@@ -31,17 +31,22 @@ function trash_run() {
 
     soppelpose.applyImpulse(2 + Math.random(), 0);
 
-
-    function delete_obj(self) {
-        soppelpose.destroy();
-    }
-
-    soppelpose.onFinishContact(function (self) {
-        setTimeout(delete_obj, 3000);
+    soppelpose.onFinishContact(function() {
+        setTimeout(function() {
+            soppelpose.destroy();
+        }, 2500);
     });
 
+    soppelpose.onImpact(function( entity, force, friction ){
 
-
+        if(entity._name == 'boxbox') {
+            console.log(entity._name);
+            console.log(entity);
+            setTimeout(function() {
+                entity.destroy();
+            }, 500);
+        }
+    });
 
 
     avaiableBoxes += 8;
