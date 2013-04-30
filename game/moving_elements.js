@@ -44,7 +44,7 @@ function trash_run() {
             console.log(entity);
             setTimeout(function() {
                 entity.destroy();
-            }, 500);
+            }, 2500);
         }
     });
 
