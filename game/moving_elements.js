@@ -40,18 +40,14 @@ function trash_run() {
     soppelpose.onImpact(function( entity, force, friction ){
 
         if(entity._name == 'boxbox') {
-            console.log(entity._name);
-            console.log(entity);
             setTimeout(function() {
                 entity.destroy();
             }, 2500);
         }
     });
 
-
-    avaiableBoxes += 8;
+    avaiableBoxes += 3;
 
     setTimeout(trash_run, 3000);
-
 
 }

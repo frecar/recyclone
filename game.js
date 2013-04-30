@@ -11,7 +11,6 @@
         world.createEntity(squirrel, {x:8, y:2}).onImpact(function (entity, normalForce, tangentialForce) {
 
             if (normalForce > 1) {
-                console.log("ja");
                 squirrel_one_dead = true;
                 this.destroy();
             }
