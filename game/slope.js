@@ -15,7 +15,7 @@ function build_slope() {
             draw: draw_invisible,
             x: 0,
             y: 0,
-            friction: 0
+            friction: 0.2
         });
 
 

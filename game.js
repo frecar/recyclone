@@ -19,6 +19,6 @@
 
     squirrels();
 
-    setTimeout(trash_run, 2000);
+    setTimeout(trash_run, 5000);
 
 })();

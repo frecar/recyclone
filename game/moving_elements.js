@@ -20,16 +20,23 @@ function trash_run() {
     var soppelpose = world.createEntity({
         name: 'soppelpose',
         shape: 'circle',
-        radius: 0.1,
+        radius: 0.2,
         x: 0.5,
         y: 0.1,
         width: 0.1,
         height: 0.1,
         density: 1,
-        friction: 0.2
+        friction: 0.1,
+        image: "gfx/pose.png",
+        imageStretchToFit: true
     });
 
-    soppelpose.applyImpulse(2 + Math.random(), 0);
+    attacks_count += 1;
+
+    attacks_count += avaiableBoxes;
+
+
+    soppelpose.applyImpulse(8 + Math.random()*3, 0);
 
     soppelpose.onFinishContact(function() {
         setTimeout(function() {
@@ -48,6 +55,7 @@ function trash_run() {
 
     avaiableBoxes += 3;
 
-    setTimeout(trash_run, 3000);
+
+    setTimeout(trash_run, 1900 + Math.random()*600);
 
 }

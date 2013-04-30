@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
-
     <style>
         canvas {
             width: 1280px;
@@ -12,7 +10,6 @@
             background:url("gfx/level.png");
         }
     </style>
-
 </head>
 <body>
 
@@ -28,6 +25,7 @@
     var canvas = document.getElementById('game');
     var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 128});
     var avaiableBoxes = 10;
+    var attacks_count = 0;
     var squirrel_one_dead = false;
     var squirrel_two_dead = false;
 </script>
