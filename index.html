@@ -9,6 +9,7 @@
             width: 1280px;
             height: 720px;
             border: 1px solid black;
+            background:url("gfx/level.png");
         }
     </style>
 
@@ -22,10 +23,18 @@
 <script>
     var canvas = document.getElementById('game');
     var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 128});
+    var avaiableBoxes = 10;
+    var squirrel_one_dead = false;
+    var squirrel_two_dead = false;
+
 </script>
 
+<script src="game/utils.js"></script>
 <script src="game/walls.js"></script>
 <script src="game/mouse.js"></script>
+<script src="game/slope.js"></script>
+<script src="game/moving_elements.js"></script>
+<script src="game/standing_elements.js"></script>
 <script src="game.js"></script>
 
 </body>
