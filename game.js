@@ -110,6 +110,8 @@
 
     function show_instructions() {
         document.getElementById("game").style.backgroundImage = 'url("gfx/instructions.jpg")';
+        document.getElementById("game").onclick = null;;
+
         setTimeout(start_game, 9000);
     }
 
