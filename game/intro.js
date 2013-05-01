@@ -8,5 +8,3 @@ var instructions = {
         rotation: [2],
         image: "instructions.png"
 };
-
-

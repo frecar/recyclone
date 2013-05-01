@@ -13,9 +13,6 @@
 </head>
 <body>
 
-<audio autoplay loop>
-    <source src="gfx/music.mp4" type="audio/mpeg">
-</audio>
 
 <canvas id="game" width="1280px" height="720px"></canvas>
 <script src="engine/box2dweb.js"></script>
@@ -24,10 +21,13 @@
 <script>
     var canvas = document.getElementById('game');
     var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 128});
-    var avaiableBoxes = 10;
+    var game_running = true;
+    var avaiableBoxes = 20;
     var attacks_count = 0;
     var squirrel_one_dead = false;
     var squirrel_two_dead = false;
+    var audioElement = document.createElement('audio');
+
 </script>
 
 
