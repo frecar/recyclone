@@ -7,7 +7,7 @@
             width: 1280px;
             height: 720px;
             border: 1px solid black;
-            background:url("gfx/level.jpg");
+            background:url("gfx/Brett.jpg");
         }
     </style>
 </head>
@@ -21,12 +21,13 @@
 <script>
     var canvas = document.getElementById('game');
     var world = boxbox.createWorld(canvas, {debugDraw: false, scale: 128});
-    var game_running = true;
+    var game_running = false;
     var avaiableBoxes = 20;
     var attacks_count = 0;
     var squirrel_one_dead = false;
     var squirrel_two_dead = false;
     var audioElement = document.createElement('audio');
+    var boxes = [];
 </script>
 
 

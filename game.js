@@ -1,5 +1,6 @@
 (function () {
 
+
     build_walls(world);
     build_slope();
     activate_mouse(canvas);
@@ -19,23 +20,28 @@
 
         if (squirrel_one_dead && squirrel_two_dead) {
             game_running = false;
-            document.getElementById("game").style.backgroundImage = 'url("gfx/gameover.jpg")';
+
+            var game_element = document.getElementById("game");
+            game_element.style.backgroundImage = 'url("gfx/gameover.jpg")';
+            game_element.onclick = start_game;
+
 
             ctx.font = "50pt Courier";
             ctx.fillText("Points: " + attacks_count, 790, 130);
 
-            if(!playing_ikkesint) {
+            if (!playing_ikkesint) {
                 playMusic("gfx/ikkesint.ogg");
                 playing_ikkesint = true;
             }
 
         } else {
-            ctx.font = "20pt Courier";
-            ctx.fillText("Points: " + attacks_count, 1010, 30);
-            ctx.font = "14pt Courier";
-            ctx.fillText("Boxes left: " + avaiableBoxes, 1000, 50);
+            if (game_running) {
+                ctx.font = "20pt Courier";
+                ctx.fillText("Points: " + attacks_count, 1010, 30);
+                ctx.font = "14pt Courier";
+                ctx.fillText("Boxes left: " + avaiableBoxes, 1000, 50);
+            }
         }
-
     });
 
     function squirrels() {
@@ -71,7 +77,44 @@
 
     playMusic("gfx/music.mp4");
 
-    squirrels();
-    setTimeout(trash_run, 8000);
+
+    function destroy_all_boxes() {
+        var o = world.find(0, 0, 10, 10);
+        for (key in o) {
+            if(o[key]._name == "boxbox") {
+                o[key].destroy();
+            }
+        }
+    }
+
+    function start_game() {
+
+        destroy_all_boxes();
+
+        game_running = true;
+        avaiableBoxes = 20;
+        attacks_count = 0;
+        squirrel_one_dead = false;
+        squirrel_two_dead = false;
+
+        var game_element = document.getElementById("game");
+        game_element.style.backgroundImage = 'url("gfx/level.jpg")';
+        game_element.onclick = null;
+
+        squirrels();
+        setTimeout(trash_run, 8000);
+
+    }
+
+
+
+    function show_instructions() {
+        document.getElementById("game").style.backgroundImage = 'url("gfx/instructions.jpg")';
+    }
+
+    setTimeout(show_instructions, 3000);
+    setTimeout(start_game, 9000);
+
 
 })();
+

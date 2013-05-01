@@ -36,7 +36,6 @@ function trash_run() {
         attacks_count += 1;
         attacks_count += avaiableBoxes;
 
-
         soppelpose.applyImpulse(8 + Math.random() * 3, 0);
 
         soppelpose.onFinishContact(function () {
@@ -44,6 +43,7 @@ function trash_run() {
                 soppelpose.destroy();
             }, 4500);
         });
+
 
         soppelpose.onImpact(function (entity, force, friction) {
 
