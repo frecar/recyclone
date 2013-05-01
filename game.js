@@ -19,7 +19,7 @@
 
         if (squirrel_one_dead && squirrel_two_dead) {
             game_running = false;
-            document.getElementById("game").style.backgroundImage = 'url("gfx/gameover.png")';
+            document.getElementById("game").style.backgroundImage = 'url("gfx/gameover.jpg")';
 
             ctx.font = "50pt Courier";
             ctx.fillText("Points: " + attacks_count, 790, 130);
@@ -60,7 +60,7 @@
         var squirrel2 = world.createEntity(squirrel, {x: 9.3, y: 2});
 
         squirrel2.onImpact(function (entity, normalForce, tangentialForce) {
-            if (normalForce > 0.09) {
+            if (normalForce > 0.06) {
                 squirrel_two_dead = true;
                 setTimeout(function () {
                     squirrel2.destroy();
